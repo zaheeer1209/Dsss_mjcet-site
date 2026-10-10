@@ -391,11 +391,12 @@ const G = (() => {
       const e = clamp(vis*(1 - Math.abs(r.top)/H), 0, 1), sc = p._sc || 1;
       g.save(); try { g.beginPath();
       const ir = p._iris === undefined ? 1 : p._iris;
-      if (ir < .999) g.arc(r.left + r.width/2, r.top + r.height/2, ir*Math.hypot(r.width, r.height)*.53, 0, Math.PI*2);
-      else g.rect(r.left, r.top, r.width, r.height);
+      const rh = Math.abs(r.top) < 2 ? Math.max(r.height, H) : r.height; // pinned: cover the strip below when the phone's address bar hides
+      if (ir < .999) g.arc(r.left + r.width/2, r.top + r.height/2, ir*Math.hypot(r.width, rh)*.53, 0, Math.PI*2);
+      else g.rect(r.left, r.top, r.width, rh);
       g.clip();
       g.globalAlpha = vis;
-      g.fillStyle = fx.bg ? fx.bg(r.left, r.width) : '#F6F8FF'; g.fillRect(r.left, r.top, r.width, r.height);
+      g.fillStyle = fx.bg ? fx.bg(r.left, r.width) : '#F6F8FF'; g.fillRect(r.left, r.top, r.width, rh);
       g.translate(r.left + r.width/2, r.top*.6 + r.height/2); g.scale(sc, sc); g.translate(-r.width/2, -r.height/2);
       base(0, r.width, !!fx.bg);
       fx.draw(st.get(p), t, reduce ? 0 : dt*(1 + vel), e, r.top);
@@ -633,7 +634,7 @@ function film(){
       .from($('.idx', p), {opacity:0, y:-24, duration:.04}, .06)
       .from($('.eb', p), {opacity:0, letterSpacing:'1.2em', duration:.06}, .07)
     // STAGE 2 · title
-      .from(chars, ENTR[p.dataset.fx](), .1)
+      .from(chars, innerWidth < 760 ? {yPercent:70, opacity:0, stagger:{each:.003}, duration:.05, ease:'power3.out'} : ENTR[p.dataset.fx](), .1)
       .from($$('.domain', p), {opacity:0, clipPath:'inset(0 50% 0 50%)', duration:.04}, .25)
     // STAGE 3 · identity lock
       .fromTo(lines, HAS.draw ? {drawSVG:'50% 50%'} : {opacity:0}, HAS.draw ? {drawSVG:'0% 100%', duration:.05, stagger:.02, ease:'power2.inOut'} : {opacity:1, duration:.03}, .25)
@@ -688,8 +689,6 @@ function film(){
       const n = $('.pl-name', pl), r = pl.getBoundingClientRect();
       C.fire(r.left + r.width/2, r.top + r.height/2, dark ? 160 : 90, dark || p.dataset.fx === 'coins');
       gsap.fromTo(pl, {rotationY:0}, {rotationY:360, transformPerspective:2400, duration:.9, ease:'power3.inOut'});
-      if (HAS.scr) gsap.to(n, {scrambleText:{text:n.dataset.text, chars:SCR, speed:.8}, duration:.9});
-      else { const o = {q:0}; gsap.to(o, {q:1, duration:.9, ease:'none', onUpdate: () => decode(n, o.q)}); }
       G.poke(p, r.left + r.width/2, r.top);
     };
     const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -724,10 +723,6 @@ function film(){
       sc.p._vis = (q < -.001 || q > 1.08) ? 0 : clamp((1.08 - q)/.1, 0, 1);
       sc.p._iris = q < .1 ? gsap.parseEase('power2.inOut')(clamp(q/.1, 0, 1)) : 1;
       sc.p._sc = q < .11 ? .35 + .65*clamp(q/.11, 0, 1) : q > .93 ? 1 + 2.4*clamp((q - .93)/.15, 0, 1) : 1;
-      if (!HAS.scr && q > -.05 && q < 1.1) sc.names.forEach(n => {
-        if (q >= .3){ if (!n._dec){ n._dec = 1; const o = {q:0}; gsap.to(o, {q:1, duration:.55, ease:'none', onUpdate: () => decode(n, o.q)}); } }
-        else if (q < .25 && n._dec){ n._dec = 0; decode(n, 1); } // scrolled back: plain name again, never left scrambled
-      });
       if (q > .47 && q < .8 && !sc.fired){ sc.fired = true; sc.fire(); } else if (q < .25 || q > .9) sc.fired = false;
     });
     setActive(clamp(Math.floor(t + .02), 0, N - 1));

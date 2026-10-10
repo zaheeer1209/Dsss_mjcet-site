@@ -285,3 +285,6 @@ html,body{overflow-x:clip}
   /* the tap hint sat under the Sound button: lift it above */
   .hint{bottom:calc(64px + env(safe-area-inset-bottom,0px));white-space:nowrap}
 }
+/* Chair scene: the page behind is navy too, so no light strip shows when the address bar hides */
+body{transition:background-color .35s}
+body.dark{background:#040C2A}
