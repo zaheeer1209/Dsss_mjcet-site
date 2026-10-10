@@ -142,11 +142,19 @@ const makeP3 = () => {
     for (let i=out.length-1;i>0;i--){ const j = Math.random()*(i+1)|0; [out[i], out[j]] = [out[j], out[i]]; }
     return out;
   }
-  function sText(txt, x0, y0, maxW, maxH){
+  function sText(txt, x0, y0, maxW, maxH, opt = {}){
+    // opt.family/weight/gap/erode keep letters readable at small sizes: the condensed display S fills in and reads as an 8
+    const wt = opt.weight || 900, gap = opt.gap || 0, fam = opt.family || '"Big Shoulders Display", Impact', F = s => `${wt} ${s}px ${fam}, sans-serif`;
     const o = document.createElement('canvas'), ox = o.getContext('2d');
-    ox.font = '900 200px "Big Shoulders Display", Impact, sans-serif'; const m = ox.measureText(txt);
-    const sc = Math.min(maxW/m.width, maxH/170), fw = Math.ceil(m.width*sc) + 8, fh = Math.ceil(200*sc);
-    o.width = fw; o.height = fh; ox.font = `900 ${200*sc}px "Big Shoulders Display", Impact, sans-serif`; ox.textBaseline = 'middle'; ox.fillText(txt, 4, fh/2);
+    ox.font = F(200); const cw = [...txt].map(ch => ox.measureText(ch).width), tw = cw.reduce((a, b) => a + b, 0) + gap*200*(txt.length - 1);
+    const sc = Math.min(maxW/tw, maxH/170), fw = Math.ceil(tw*sc) + 8, fh = Math.ceil(200*sc);
+    o.width = fw; o.height = fh; ox.font = F(200*sc); ox.textBaseline = 'middle';
+    let x = 4; [...txt].forEach((ch, i) => { ox.fillText(ch, x, fh/2); x += (cw[i] + gap*200)*sc; });
+    if (opt.erode){ // shave the outline off every letter: opens up the gaps inside S so the dots can't close them
+      ox.globalCompositeOperation = 'destination-out'; ox.lineWidth = opt.erode*200*sc; ox.lineJoin = 'round';
+      x = 4; [...txt].forEach((ch, i) => { ox.strokeText(ch, x, fh/2); x += (cw[i] + gap*200)*sc; });
+      ox.globalCompositeOperation = 'source-over';
+    }
     return grid(ox, fw, fh, x0 - fw/2, y0 - fh/2, .9);
   }
   function sIcon(svg, x0, y0, size){
@@ -161,7 +169,7 @@ const makeP3 = () => {
   function set(name, force){
     if (name === shape && !force) return; shape = name;
     let p = [], depth = 50, c = [W/2, H/2];
-    if (name === 'DSSS'){ c = W < 760 ? [W/2, H*.2] : [W/2, H*.43]; p = sText('DSSS', c[0], c[1], Math.min(W*.82, 980), W < 760 ? H*.17 : H*.3); } // phones: sit above the title, not on it
+    if (name === 'DSSS'){ c = W < 760 ? [W/2, H*.2] : [W/2, H*.43]; p = W < 760 ? sText('DSSS', c[0], c[1], W*.84, H*.16, {family:'"IBM Plex Sans"', weight:700, gap:.06, erode:.03}) : sText('DSSS', c[0], c[1], Math.min(W*.82, 980), H*.3); } // phones: sit above the title, not on it
     else if (name === '12'){ c = W < 820 ? [W/2, H*.24] : [W*.74, H*.5]; p = W < 820 ? sText('12', c[0], c[1], W*.6, H*.22) : sText('12', c[0], c[1], W*.36, H*.62); }
     else if (name && name.startsWith('icon:')){
       const svg = document.querySelector('#' + name.slice(5) + ' .ic');
