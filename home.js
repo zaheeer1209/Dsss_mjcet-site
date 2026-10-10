@@ -128,13 +128,11 @@ function film(){
   const hl = HAS.split ? SplitText.create('#heroH .l1, #heroH .l2', {type:'words,chars'}).chars : [];
   gsap.set('#heroH .l1, #heroH .l2, #heroH div', {transformStyle:'preserve-3d'});
   stage('#hero', 4, tl => {
-    tl.fromTo('#hero .cue', {opacity:1}, {opacity:0, duration:.05, immediateRender:false}, 0)
-      .fromTo('#hero p, #hero .cta', {y:0, opacity:1}, {y:60, opacity:0, stagger:.04, duration:.2, immediateRender:false}, .08)
+    tl.fromTo('#hero p, #hero .cta', {y:0, opacity:1}, {y:60, opacity:0, stagger:.04, duration:.2, immediateRender:false}, .08)
       // letters drift apart at the speed of the scroll, and only fade near the end
       .fromTo(hl.length ? hl : '#heroH', {x:0, y:0, z:0, rotationX:0, rotationY:0},
         {immediateRender:false, z: () => rnd(30, 140), y: () => rnd(-110, 110), x: () => rnd(-130, 130), rotationX: () => rnd(-45, 45), rotationY: () => rnd(-45, 45), stagger:{amount:.12, from:'random'}, duration:.5, ease:'power2.in'}, .35)
-      .fromTo(hl.length ? hl : '#heroH', {opacity:1}, {immediateRender:false, opacity:0, stagger:{amount:.12, from:'random'}, duration:.45, ease:'power4.in'}, .42)
-      .fromTo('#hero .top', {y:0, opacity:1, rotationX:0}, {y:-80, rotationX:80, opacity:0, duration:.1, immediateRender:false}, .85);
+      .fromTo(hl.length ? hl : '#heroH', {opacity:1}, {immediateRender:false, opacity:0, stagger:{amount:.12, from:'random'}, duration:.45, ease:'power4.in'}, .42);
   }, .3);
 
   // 01 MANIFEST · ~4.5 screens: stats flip down like tiles while the DS+ mark turns in 3D
