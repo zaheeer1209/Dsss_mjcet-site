@@ -161,7 +161,7 @@ const makeP3 = () => {
   function set(name, force){
     if (name === shape && !force) return; shape = name;
     let p = [], depth = 50, c = [W/2, H/2];
-    if (name === 'DSSS'){ c = [W/2, H*.43]; p = sText('DSSS', c[0], c[1], Math.min(W*.82, 980), H*.3); }
+    if (name === 'DSSS'){ c = W < 760 ? [W/2, H*.2] : [W/2, H*.43]; p = sText('DSSS', c[0], c[1], Math.min(W*.82, 980), W < 760 ? H*.17 : H*.3); } // phones: sit above the title, not on it
     else if (name === '12'){ c = W < 820 ? [W/2, H*.24] : [W*.74, H*.5]; p = W < 820 ? sText('12', c[0], c[1], W*.6, H*.22) : sText('12', c[0], c[1], W*.36, H*.62); }
     else if (name && name.startsWith('icon:')){
       const svg = document.querySelector('#' + name.slice(5) + ' .ic');
@@ -726,7 +726,7 @@ function film(){
   // ASSEMBLY
   gsap.timeline({ scrollTrigger:{ trigger:'#assembly', start:'top top', end:'+=130%', pin:true, scrub:1 } })
     .from('#assembly h2, #assembly .eb', {y:60, opacity:0, stagger:.05, duration:.2}, 0)
-    .from($$('.mcard'), { x: () => rnd(-innerWidth*.6, innerWidth*.6), y: () => rnd(-innerHeight*.7, innerHeight*.7), rotate: () => rnd(-50, 50), scale: () => rnd(.4, 1.5), opacity:0, stagger:{each:.03}, duration:.6, ease:'power3.out' }, .05)
+    .from($$('.mcard'), { x: () => rnd(-innerWidth*.6, innerWidth*.6), y: () => rnd(-innerHeight*.7, innerHeight*.7), rotate: () => rnd(-50, 50), scale: () => rnd(.4, innerWidth < 760 ? 1.1 : 1.5), opacity:0, stagger:{each:.03}, duration:.6, ease:'power3.out' }, .05)
     .to({}, {duration:.15});
   gsap.from('.fcard', { scrollTrigger:{ trigger:'#faculty', start:'top 75%', end:'top 25%', scrub:1 }, y:60, opacity:0, stagger:.1 });
 
