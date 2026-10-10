@@ -69,7 +69,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .lab{position:absolute;top:-12px;left:14px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;background:var(--paper);color:var(--blue);border:1.5px solid var(--blue);padding:2px 8px;text-transform:uppercase;z-index:2}
 
 /* HERO */
-#hero{height:100vh;height:100svh;min-height:600px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:26px;text-align:center;overflow:hidden;padding-top:60px}
+#hero{height:100vh;height:100lvh;min-height:600px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:26px;text-align:center;overflow:hidden;padding-top:60px}
 #hero .top{display:grid;justify-items:center;gap:14px}
 #hero .word{display:none}
 #hero .bottom{display:grid;justify-items:center;gap:18px;padding-inline:16px}
@@ -94,7 +94,7 @@ body.js main section[data-hud] > .wrap,#hero .cam{transform-style:preserve-3d;wi
 .h2,.mani{transform-style:preserve-3d}
 .h2 > div,.mani > div{transform-style:preserve-3d}
 /* every section is a pinned full-screen stage */
-body.js main section[data-hud]{min-height:100vh;min-height:100svh;display:grid;align-content:center;padding-block:84px 40px}
+body.js main section[data-hud]{min-height:100vh;min-height:100lvh;display:grid;align-content:center;padding-block:84px 40px}
 body.js main section[data-hud] > .wrap{width:100%}
 body.js #hero{padding-block:60px 0}
 body.js .stack-wrap,body.js .pipe-wrap,body.js .gb-wrap{height:auto;min-height:0;padding-block:0}
@@ -114,7 +114,7 @@ main section[data-hud] > .wrap{z-index:1}
 
 /* PILLARS — stacking cards */
 #pillars{min-height:100vh}
-.stack-wrap{height:100vh;height:100svh;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,80px);align-items:center}
+.stack-wrap{height:100vh;height:100lvh;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,80px);align-items:center}
 @media (max-width:860px){.stack-wrap{grid-template-columns:1fr;align-content:center;gap:24px}}
 .stack{position:relative;height:min(440px,52vh)}
 .card{position:absolute;inset:0;background:var(--white);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:clamp(22px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;will-change:transform}
@@ -129,7 +129,7 @@ main section[data-hud] > .wrap{z-index:1}
 
 /* STRUCTURE */
 #structure{min-height:100vh}
-.pipe-wrap{height:100vh;height:100svh;display:grid;align-content:center;gap:28px}
+.pipe-wrap{height:100vh;height:100lvh;display:grid;align-content:center;gap:28px}
 .pipe{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,4vw,60px);align-items:start;margin-top:18px}
 @media (max-width:760px){.pipe{grid-template-columns:1fr;gap:26px}}
 .tier{position:relative;background:rgba(255,255,255,.9);border:2px solid var(--ink);padding:20px 20px 22px;z-index:2;min-width:0}
