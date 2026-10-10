@@ -9,7 +9,7 @@ const membersFallback = [
   ["Riham Mujtaba","Deputy General Secretary","Administration"],["Mir Sajjad Ali Razvi","Treasurer","Finance"],
   ["Syeda Rania Fatima","Chief Representative","Representation"],["Mohid Uddin","Chief Representative","Representation"],
   ["Syed Sohaib Sultan Razvi","Tech Captain","Technical"],["Tauqeer Ahmed Farhan","Tech Captain","Technical"],
-  ["Moghal Asif","Advisor Communication and Collaboration","Advisory"],["Ghulam Waheed","Advisor Hackathon","Advisory"]
+  ["Moghal Asif Ahamad Baig","Advisor Communication and Collaboration","Advisory"],["Ghulam Waheed","Advisor Hackathon","Advisory"]
 ].map(([name, designation, department]) => ({ name, designation, department }));
 
 const ICONS = {
