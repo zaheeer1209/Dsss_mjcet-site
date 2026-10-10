@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/portal.html", "destination": "/mainframe", "permanent": true },
+    { "source": "/portal", "destination": "/mainframe", "permanent": true }
+  ]
+}

@@ -5,9 +5,13 @@ Static site, no build step. Every file in this folder is served as-is.
 | Page | Files |
 |---|---|
 | Home (3D scroll film) | index.html, home.css, home.js |
-| Mainframe / Governing Body | portal.html, portal.css, portal.js, portal-film.js |
+| Mainframe / Governing Body | mainframe.html, portal.css, portal.js, portal-film.js |
 | Gallery | gallery.html, gallery.js, style.css |
 | Shared | supabase-config.js, favicon.png, apple-touch-icon.png, og-image.png |
+
+## URLs
+`vercel.json` turns on clean URLs: `/` (home), `/mainframe`, `/gallery`.
+Old `/portal.html` links redirect to `/mainframe`.
 
 ## Supabase
 `supabase-config.js` needs the project URL and the **anon / publishable** key
