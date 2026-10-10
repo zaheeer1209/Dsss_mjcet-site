@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DSSS // MAINFRAME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="portal.css">
+</head>
+<body>
+<canvas id="pt" aria-hidden="true"></canvas>
+<canvas id="fxbg" aria-hidden="true"></canvas>
+<div class="scanl" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div id="stages" aria-hidden="true"><div data-s="0">Arrival</div><div data-s="1">Title</div><div data-s="2">Identity lock</div><div data-s="3">Story</div><div data-s="4">Hold</div><div data-s="5">Exit</div><div class="pct" id="pct">000%</div></div>
+<button type="button" id="snd" aria-pressed="false"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sndl">Sound off</span></button>
+<div id="cur" aria-hidden="true"><span id="curl">TAP</span></div><div id="dot" aria-hidden="true"></div>
+<div id="boot" aria-hidden="true"><pre id="bootTxt"></pre></div>
+
+<header class="hud">
+  <span><b>DSSS</b> // MAINFRAME</span>
+  <span id="hudsec" aria-hidden="true">00 · BOOT</span>
+  <nav aria-label="Site"><a class="home" href="index.html">Home</a><a class="on" href="portal.html">Governing body</a><a href="gallery.html">Gallery</a></nav>
+  <i class="bar" id="hudbar"></i>
+</header>
+
+<main>
+  <section id="hero" data-hud="00 · THE RESULTS ARE IN">
+    <div class="top"><span class="tag"><i></i>The results are in</span></div>
+    <div class="word" aria-hidden="true"></div>
+    <div class="bottom">
+      <h1 id="heroH"><span class="ln">DSSS Governing Body</span><span class="yr">2026–27</span></h1>
+      <p><span id="heroPeople">Twelve people</span>. <span id="heroRoles">Nine designations</span>. One society. Scroll to meet the team that runs the Data Science Student Society at MJCET this year.</p>
+      <div class="cue"><span>Scroll</span><i></i></div>
+    </div>
+  </section>
+
+  <section id="manifest" data-hud="00 · MANIFEST">
+    <div class="wrap man-grid">
+      <div class="man-copy">
+        <span class="eb">Governing Body 2026–27</span>
+        <div class="stat"><b id="statMembers" data-to="12">12</b><span>Members</span></div>
+        <div class="stat"><b id="statRoles" data-to="9">09</b><span>Designations</span></div>
+        <div class="stat"><b data-to="1">01</b><span>Society</span></div>
+        <p>Revealed in the same order as the results night: advisors first, the Chair last.</p>
+      </div>
+      <div class="man-space" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <div class="wrap act-h" id="desh"><span class="eb" id="deshLabel">Designations 01 → 09</span><h2>One by <em>one</em></h2></div>
+
+  <!-- one scene per designation, built by portal.js from the members table -->
+  <section id="stage" data-hud="DESIGNATIONS"></section>
+
+  <section id="assembly" data-hud="ROSTER · ASSEMBLED">
+    <div class="wrap">
+      <span class="eb">The full team</span>
+      <h2>The governing body,<br><em>assembled.</em></h2>
+      <div class="roster" id="roster"></div>
+    </div>
+  </section>
+
+  <section id="faculty" data-hud="GUIDED BY">
+    <div class="wrap">
+      <span class="eb">Under the guidance of</span>
+      <h2>Our mentors</h2>
+      <div class="fac">
+        <div class="fcard"><b>Dr. Fahmina Taranum</b><span>Professor &amp; Head, CSE (Data Science)</span></div>
+        <div class="fcard"><b>Dr. Md. Asrar Ahmed</b><span>Associate Head, CSE (Data Science)</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="pdii">People<i>|</i>Data<i>|</i>Ideas<i>|</i>Impact</div>
+    <small>DSSS // MAINFRAME · <a href="index.html">Return home ↑</a></small>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/SplitText.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/DrawSVGPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/Draggable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/InertiaPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/CustomEase.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/CustomWiggle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="portal-film.js"></script>
+<script src="portal.js"></script>
+</body>
+</html>

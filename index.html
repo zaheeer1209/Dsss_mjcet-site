@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DSSS MJCET // Data Science Student Society</title>
+<meta name="description" content="DSSS is the Data Science Student Society at MJCET, Hyderabad. People, data, ideas, impact: workshops, hackathons, Kaggle sprints and real projects.">
+<meta name="theme-color" content="#0B4BF5">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- link preview card for WhatsApp, Instagram, LinkedIn, X -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DSSS MJCET">
+<meta property="og:title" content="DSSS · Data Science Student Society, MJCET">
+<meta property="og:description" content="People | Data | Ideas | Impact. The data science society at MJCET, Hyderabad.">
+<meta property="og:url" content="https://dsssmjcet.com/">
+<meta property="og:image" content="https://dsssmjcet.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DSSS, Data Science Student Society, MJCET Hyderabad">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DSSS · Data Science Student Society, MJCET">
+<meta name="twitter:description" content="People | Data | Ideas | Impact. The data science society at MJCET, Hyderabad.">
+<meta name="twitter:image" content="https://dsssmjcet.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="home.css">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="scanl" aria-hidden="true"></div>
+<div id="cur" aria-hidden="true"><span>GO</span></div>
+
+<header class="hud">
+  <a class="brand" href="#hero" aria-label="DSSS home"><img src="data:image/png;base64,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" alt="DSSS"><small>DSSS // MJCET</small></a>
+  <nav aria-label="Sections"><a href="#hero">Home</a><a href="#manifest">Manifest</a><a href="#vision">Vision</a><a href="#goals">Goals</a><a href="#teams">Teams</a><a href="gallery.html">Gallery</a></nav>
+  <span id="hudsec" aria-hidden="true">● LIVE SYSTEM</span>
+  <a class="btn sm" href="portal.html">Mainframe ↗</a>
+  <i class="bar" id="hudbar"></i>
+</header>
+
+<main>
+  <section id="hero" data-hud="DSSS // HOME_PORTAL · BUILD 27">
+    <div class="mq" aria-hidden="true">Insight today — Impact tomorrow — Insight today — Impact tomorrow —</div>
+    <div class="cam">
+      <div class="top"><span class="tag"><i></i>The results are in</span></div>
+      <div class="bottom">
+        <h1 id="heroH"><span class="l1">DSSS Data Science</span><span class="l2">Student Society</span></h1>
+        <div class="hyear">2026–27</div>
+        <p>Curiosity becomes computation. Ideas become systems. Data becomes impact.</p>
+        <div class="cta"><a class="btn" href="#manifest">Enter the society ↓</a><a class="btn ghost" href="portal.html">Open mainframe ↗</a></div>
+        <div class="cue"><span>Scroll to decrypt</span><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="manifest" data-hud="00 · MANIFEST">
+    <div class="mq" aria-hidden="true">Manifest — DSSS_2026-27.enc — Manifest — DSSS_2026-27.enc —</div>
+    <div class="wrap man-grid">
+      <div class="man-copy">
+        <div class="eb">Manifest // DSSS_2026-27.enc</div>
+        <div class="stat"><b data-to="1">01</b><span>Society</span></div>
+        <div class="stat"><b>∞</b><span>Ideas</span></div>
+        <div class="stat"><b data-to="1">01</b><span>Mission</span></div>
+        <p>One student society. Multiple disciplines. A shared obsession with learning, building, competing and creating useful things.</p>
+        <details class="what"><summary>What is DSSS? <i>+</i></summary><p>DSSS is a student-led space for data science, analytics, AI, machine learning, programming, projects, workshops and collaboration.</p></details>
+      </div>
+      <div id="mark" aria-hidden="true">DS<span>+</span></div>
+    </div>
+  </section>
+
+  <section id="vision" data-hud="01 · VISION">
+    <div class="mq" aria-hidden="true">Vision — Signal received — Vision — Signal received —</div>
+    <div class="wrap">
+      <div class="eb">Vision // Signal_received</div>
+      <h2 class="h2">Build the <em>data-minded</em> generation.</h2>
+      <p class="lead" id="lead">To build a community of data-driven thinkers, innovators, and problem solvers who use Data Science and emerging technologies to create meaningful solutions for real-world challenges.</p>
+      <div class="rule-grid" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    </div>
+  </section>
+
+  <section id="goals" data-hud="02 · GOALS">
+    <div class="mq" aria-hidden="true">Objectives — 2026-2027 protocol — Objectives — 2026-2027 protocol —</div>
+    <div class="wrap">
+      <div class="eb">Objectives // 2026-2027_protocol</div>
+      <h2 class="h2">Our goals <em>2026–2027.</em></h2>
+      <p class="hint">Tap any objective to expand the signal.</p>
+      <div class="ring-stage"><div class="ring" id="ring">
+        <article class="g"><b>01</b><h3>Foundation</h3><p>Build a strong foundation for future tenures.</p></article>
+        <article class="g"><b>02</b><h3>Industry</h3><p>Conduct hands-on, industry-oriented workshops.</p></article>
+        <article class="g"><b>03</b><h3>Beyond campus</h3><p>Create opportunities for members beyond the campus.</p></article>
+        <article class="g"><b>04</b><h3>Build &amp; showcase</h3><p>Give students a place to build and showcase their projects.</p></article>
+        <article class="g"><b>05</b><h3>Identity</h3><p>Build a recognisable identity for DSSS.</p></article>
+        <article class="g"><b>06</b><h3>Awareness</h3><p>Make more people aware of data science and data analytics.</p></article>
+        <article class="g"><b>07</b><h3>Access</h3><p>Make data science resources more accessible.</p></article>
+        <article class="g"><b>08</b><h3>Balance</h3><p>Strike a healthy balance between learning and fun.</p></article>
+        <article class="g"><b>09</b><h3>Reach</h3><p>Grow the reach of DSSS every year.</p></article>
+        <article class="g"><b>10</b><h3>Legacy</h3><p>Create a cycle of growth, where today's members become tomorrow's mentors and leaders.</p></article>
+      </div></div>
+      <div class="goal-count" id="goalCount" aria-hidden="true">Objective 01 / 10</div>
+    </div>
+  </section>
+
+  <section id="teams" data-hud="03 · TEAMS">
+    <div class="mq" aria-hidden="true">Portfolios — Team matrix — Portfolios — Team matrix —</div>
+    <div class="wrap team-wrap">
+      <div>
+        <div class="eb">Portfolios // Team_matrix</div>
+        <h2 class="h2">Builders <em>in position.</em></h2>
+        <span class="status">● System ready</span>
+      </div>
+      <div class="tstack" id="tstack">
+        <div class="tcard"><span class="k">TECH_01 <i>↗</i></span><h3>Data Science</h3><p>Data analysis, statistics, visualization, real-world datasets and data-driven problem solving.</p></div>
+        <div class="tcard"><span class="k">TECH_02 <i>↗</i></span><h3>AI / ML</h3><p>Artificial Intelligence, Machine Learning, Deep Learning, NLP, Computer Vision and experimentation.</p></div>
+        <div class="tcard"><span class="k">TECH_03 <i>↗</i></span><h3>Web Development</h3><p>Responsive websites, digital platforms, event systems and reliable web-based solutions.</p></div>
+        <div class="tcard"><span class="k">TECH_04 <i>↗</i></span><h3>DSA</h3><p>Problem solving, algorithms, coding sessions, competitions, complexity analysis and interview preparation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" data-hud="04 · TRANSMISSION">
+    <div class="bigmq" id="mq1" aria-hidden="true">Enter the mainframe <span class="o">— Enter the mainframe —</span> Enter the mainframe <span class="o">— Enter the mainframe —</span></div>
+    <div class="wrap">
+      <div class="eb">DSSS // Endpoint</div>
+      <h2 class="h2">Insight today.<br><em>Impact tomorrow.</em></h2>
+      <div class="cta"><a class="btn" id="magnet" href="portal.html">Enter DSSS // Mainframe ↗</a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="pdii">People<i>|</i>Data<i>|</i>Ideas<i>|</i>Impact</div>
+    <small>DSSS // MJCET · Data Science Student Society · © 2026–27</small>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/SplitText.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="home.js"></script>
+</body>
+</html>
