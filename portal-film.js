@@ -167,6 +167,7 @@ const makeP3 = () => {
     return grid(ox, S, S, x0 - S/2, y0 - S/2, .6);
   }
   function set(name, force){
+    if (W < 760 && name && (name === '12' || name.startsWith('icon:'))) name = 'scatter'; // phones: no shape behind the text column
     if (name === shape && !force) return; shape = name;
     let p = [], depth = 50, c = [W/2, H/2];
     if (name === 'DSSS'){ c = W < 760 ? [W/2, H*.2] : [W/2, H*.43]; p = W < 760 ? sText('DSSS', c[0], c[1], W*.84, H*.16, {family:'"IBM Plex Sans"', weight:700, gap:.06, erode:.03}) : sText('DSSS', c[0], c[1], Math.min(W*.82, 980), H*.3); } // phones: sit above the title, not on it
@@ -192,6 +193,7 @@ const makeP3 = () => {
     set(shape, true);
   }
   function frame(t){
+    requestAnimationFrame(frame);
     const T = t*.001, cs = Math.cos(spin), sn = Math.sin(spin), wv = warp, ws = T*900;
     for (let i=0;i<N;i++){
       const j = i*3; let tx = tgt[j], ty = tgt[j+1], tz = tgt[j+2];
@@ -211,7 +213,6 @@ const makeP3 = () => {
     cam.position.x += (mx*60 - cam.position.x)*.05; cam.position.y += (-my*40 - cam.position.y)*.05; cam.lookAt(0, 0, 0);
     mat.uniforms.uColor.value.copy(blue).lerp(white, dark);
     R.render(scene, cam);
-    requestAnimationFrame(frame);
   }
   addEventListener('pointermove', e => {
     mx = e.clientX/innerWidth - .5; my = e.clientY/innerHeight - .5;
@@ -290,7 +291,8 @@ const G = (() => {
         const max = Math.min(W, H)*.62;
         s.rings = s.rings.filter(r => t - r.b < 3.6);
         for (const r of s.rings){
-          const k = (t - r.b)/3.6, rad = 8 + k*max;
+          if (t < r.b) continue; // staggered rings poked by a tap start slightly in the future
+          const k = (t - r.b)/3.6, rad = Math.max(0, 8 + k*max);
           g.beginPath(); g.arc(r.x, r.y, rad, 0, 7); g.lineWidth = 14*(1 - k) + 1; g.strokeStyle = `rgba(21,83,230,${.24*(1 - k)})`; g.stroke();
           g.beginPath(); g.arc(r.x, r.y, rad*.55, 0, 7); g.lineWidth = 3; g.strokeStyle = `rgba(157,182,240,${.3*(1 - k)})`; g.stroke();
         }
@@ -387,7 +389,7 @@ const G = (() => {
       const fx = FX[p.dataset.fx]; if (!fx) continue;
       if (!st.has(p)) st.set(p, fx.init());
       const e = clamp(vis*(1 - Math.abs(r.top)/H), 0, 1), sc = p._sc || 1;
-      g.save(); g.beginPath();
+      g.save(); try { g.beginPath();
       const ir = p._iris === undefined ? 1 : p._iris;
       if (ir < .999) g.arc(r.left + r.width/2, r.top + r.height/2, ir*Math.hypot(r.width, r.height)*.53, 0, Math.PI*2);
       else g.rect(r.left, r.top, r.width, r.height);
@@ -397,10 +399,11 @@ const G = (() => {
       g.translate(r.left + r.width/2, r.top*.6 + r.height/2); g.scale(sc, sc); g.translate(-r.width/2, -r.height/2);
       base(0, r.width, !!fx.bg);
       fx.draw(st.get(p), t, reduce ? 0 : dt*(1 + vel), e, r.top);
-      g.restore();
+      } catch (err){ console.warn('scene visual skipped a frame', err); }
+      finally { g.restore(); }
     }
   }
-  function loop(n){ vel *= .93; document.documentElement.style.setProperty('--v', vel.toFixed(3)); render(n); requestAnimationFrame(loop); }
+  function loop(n){ requestAnimationFrame(loop); vel *= .93; document.documentElement.style.setProperty('--v', vel.toFixed(3)); render(n); } // schedule first: an error can't stop the loop
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
   function poke(p, cx, cy){
     const fx = FX[p.dataset.fx], s = st.get(p); if (!fx || !s || !fx.poke) return;
@@ -526,6 +529,8 @@ function boot(done){
 /* ---------- scroll film ---------- */
 function film(){
   gsap.registerPlugin(ScrollTrigger, ...[window.SplitText, window.ScrambleTextPlugin, window.DrawSVGPlugin, window.Draggable, window.InertiaPlugin, window.CustomEase, window.CustomWiggle].filter(Boolean));
+  gsap.config({ nullTargetWarn: false }); // optional scene parts (e.g. no domain line) are simply skipped
+  ScrollTrigger.config({ ignoreMobileResize: true }); // the phone address bar showing/hiding must not re-measure the page (it made the scroll jump)
   const HAS = { split: !!window.SplitText, scr: false, draw: !!window.DrawSVGPlugin, drag: !!(window.Draggable && window.InertiaPlugin), wig: !!(window.CustomWiggle && window.CustomEase) };
   if (HAS.wig) CustomWiggle.create('impact', {wiggles:9, type:'easeOut'});
   const SCR = '01#%&@$<>/=+*';
@@ -719,7 +724,10 @@ function film(){
       sc.p._vis = (q < -.001 || q > 1.08) ? 0 : clamp((1.08 - q)/.1, 0, 1);
       sc.p._iris = q < .1 ? gsap.parseEase('power2.inOut')(clamp(q/.1, 0, 1)) : 1;
       sc.p._sc = q < .11 ? .35 + .65*clamp(q/.11, 0, 1) : q > .93 ? 1 + 2.4*clamp((q - .93)/.15, 0, 1) : 1;
-      if (!HAS.scr && q > -.05 && q < 1.1) sc.names.forEach(n => decode(n, clamp((q - .3)/.16, 0, 1)));
+      if (!HAS.scr && q > -.05 && q < 1.1) sc.names.forEach(n => {
+        if (q >= .3){ if (!n._dec){ n._dec = 1; const o = {q:0}; gsap.to(o, {q:1, duration:.55, ease:'none', onUpdate: () => decode(n, o.q)}); } }
+        else if (q < .25 && n._dec){ n._dec = 0; decode(n, 1); } // scrolled back: plain name again, never left scrambled
+      });
       if (q > .47 && q < .8 && !sc.fired){ sc.fired = true; sc.fire(); } else if (q < .25 || q > .9) sc.fired = false;
     });
     setActive(clamp(Math.floor(t + .02), 0, N - 1));
