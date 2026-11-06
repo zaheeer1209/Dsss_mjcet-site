@@ -413,3 +413,36 @@ body.js #recruit .r-panel.on{visibility:visible}
   .case-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:520px){.case-sessions{grid-template-columns:1fr}}
+
+/* ===== CONTACT: details + query form (not a pinned stage, so typing never fights the scroll) ===== */
+#contact{padding-block:clamp(90px,12vw,150px) clamp(60px,8vw,100px);border-top:2px solid var(--ink);background:var(--paper)}
+.contact-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(30px,5vw,70px);align-items:start}
+.ct-list{list-style:none;padding:0;margin:28px 0 0;border-top:2px solid var(--ink)}
+.ct-list li{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}
+.ct-list span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:600}
+.ct-list a,.ct-list b{font-family:var(--display);font-weight:800;font-size:clamp(20px,2vw,28px);text-transform:uppercase;color:var(--ink);text-decoration:none;line-height:1.1;overflow-wrap:anywhere}
+.ct-list a:hover{color:var(--blue)}
+.ct-list li:first-child a{text-transform:none}
+.ct-form{position:relative;background:var(--white);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--blue);padding:clamp(22px,3vw,36px);display:grid;gap:18px}
+.fld{display:grid;gap:8px;border:0;margin:0;padding:0;min-width:0}
+.fld label,.fld legend{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ink);padding:0}
+.fld legend{margin-bottom:8px}
+.fld small{text-transform:none;letter-spacing:0;color:var(--muted);font-weight:400}
+.fld input:not([type=radio]),.fld textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);padding:12px 14px;min-height:46px;width:100%;box-sizing:border-box;border-radius:0}
+.fld textarea{resize:vertical;min-height:110px}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,75,245,.15)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative;cursor:pointer;text-transform:none;letter-spacing:0;font-family:var(--body);font-size:14px;font-weight:500}
+.chips input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chips span{display:inline-flex;align-items:center;min-height:40px;padding:8px 14px;border:1.5px solid var(--line);background:var(--paper);transition:background .15s,border-color .15s,color .15s}
+.chips input:checked + span{background:var(--blue);border-color:var(--blue);color:#fff}
+.chips input:focus-visible + span{outline:2px solid var(--blue);outline-offset:2px}
+.chips label:hover span{border-color:var(--blue)}
+.ct-err{margin:0;min-height:1.2em;color:#C4170C;font-size:14px;font-weight:600}
+.ct-send{display:flex;flex-wrap:wrap;gap:10px}
+.ct-send .btn{min-height:46px}
+.ct-note{margin:0;color:var(--muted);font-size:13px}
+@media (max-width:860px){.contact-wrap{grid-template-columns:1fr}}
+@media (max-width:420px){.ct-list li{grid-template-columns:1fr;gap:2px}}
+#contact .h2{font-size:clamp(44px,5.6vw,92px)}
+.chips span{color:var(--ink)}
