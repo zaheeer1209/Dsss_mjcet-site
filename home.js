@@ -186,6 +186,19 @@ function film(){
     lenis ? lenis.scrollTo(y, {duration:1.4}) : scrollTo({top:y, behavior:'smooth'});
   }));
 
+  // 03b LAST EVENT · ~5 screens: the case file flies in on its paperclip, the facts flip, CASE CLOSED stamps down
+  if ($('#caseFile')){
+    stage('#caseFile', innerWidth < 760 ? 4 : 5, (tl, sec) => {
+      ebIn(tl, sec, 0); heading(tl, sec, .03, .16);
+      tl.from('#caseFile .case-poster', {z:-900, rotationY:-50, rotationX:20, rotation:-18, opacity:0, transformPerspective:1300, duration:.2, ease:'power3.out'}, .04)
+        .from('#caseFile .case-lede', {y:40, opacity:0, duration:.08}, .2)
+        .from('#caseFile .case-facts div', {rotationX:-90, transformOrigin:'50% 0%', transformPerspective:800, opacity:0, stagger:.04, duration:.08, ease:'back.out(1.5)'}, .26)
+        .from('#caseFile .case-sessions li', {x:-40, opacity:0, stagger:.025, duration:.06}, .38)
+        .fromTo('#caseFile .stamp', {scale:3, opacity:0, rotation:-30}, {scale:1, opacity:1, rotation:-14, duration:.06, ease:'power4.in', immediateRender:true}, .6)
+        .from('#caseFile .case-cta .btn', {rotationX:-90, transformOrigin:'50% 0%', transformPerspective:700, opacity:0, duration:.08, ease:'back.out(1.6)'}, .66);
+    }, .78);
+  }
+
   // 04 TEAMS · desktop ~5.5 screens: four team cards land on a 3D deck
   //          phones ~3 screens: the deck flies in once, then the cards are a swipe row
   const tc = $$('#tstack .tcard'), tstack = $('#tstack'), swipe = innerWidth < 760;
