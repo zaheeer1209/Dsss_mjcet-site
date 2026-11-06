@@ -446,3 +446,6 @@ body.js #recruit .r-panel.on{visibility:visible}
 @media (max-width:420px){.ct-list li{grid-template-columns:1fr;gap:2px}}
 #contact .h2{font-size:clamp(44px,5.6vw,92px)}
 .chips span{color:var(--ink)}
+/* contact: details only (query form dropped) */
+.contact-wrap{align-items:center}
+#contact .ct-list{margin-top:0}
