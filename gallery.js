@@ -5,7 +5,7 @@ function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 /* ---- albums: fill each photo button, then a lightbox with prev / next / swipe / keys ---- */
 const photos = [...document.querySelectorAll(".photos .ph")];
 photos.forEach(b => {
-  const src = `gallery/data-rescue/dr-${b.dataset.n}.jpg`, cap = b.dataset.cap;
+  const src = `media/data-rescue/dr-${b.dataset.n}.jpg`, cap = b.dataset.cap;
   b.innerHTML = `<img src="${src}" alt="${esc(cap)}" loading="lazy" decoding="async"><span>${esc(cap)}</span>`;
   b.setAttribute("aria-label", `Open photo: ${cap}`);
 });
@@ -13,7 +13,7 @@ const lb = document.getElementById("lightbox"), lbImg = document.getElementById(
 let at = 0;
 function show(i){
   at = (i + photos.length) % photos.length;
-  const b = photos[at]; lbImg.src = `gallery/data-rescue/dr-${b.dataset.n}.jpg`; lbImg.alt = b.dataset.cap;
+  const b = photos[at]; lbImg.src = `media/data-rescue/dr-${b.dataset.n}.jpg`; lbImg.alt = b.dataset.cap;
   lbCap.textContent = `${b.dataset.cap}  ·  ${at + 1} / ${photos.length}`;
 }
 photos.forEach((b, i) => b.addEventListener("click", () => { show(i); lb.showModal ? lb.showModal() : lb.setAttribute("open", ""); }));
