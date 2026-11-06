@@ -430,3 +430,17 @@ footer#contact small{color:#9FB2EE}
 footer#contact a:focus-visible{outline:2px solid var(--pale);outline-offset:3px}
 @media (max-width:900px){.ft-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ft-brand{grid-column:1 / -1}}
 @media (max-width:480px){.ft-grid{grid-template-columns:1fr}}
+
+/* ===== top bar goes dark inside the recruitment scene ===== */
+.hud,.hud .brand small,.hud nav a,#hudsec,.hud .btn,.hud .bar{transition:background-color .45s ease,border-color .45s ease,color .45s ease,box-shadow .45s ease,filter .45s ease}
+.hud .brand img{transition:filter .45s ease}
+body.hud-dark .hud{background:rgba(10,10,10,.94);border-bottom-color:#262626}
+body.hud-dark .hud .brand img{filter:brightness(0) invert(1)}
+body.hud-dark .hud .brand small{color:#8A877F}
+body.hud-dark .hud nav a{color:#F4F3EF}
+body.hud-dark .hud nav a:hover,body.hud-dark .hud nav a.nav-join{color:#FF2E1F}
+body.hud-dark #hudsec{color:#FF2E1F}
+body.hud-dark .hud .btn{background:#FF2E1F;border-color:#FF2E1F;color:#0A0A0A}
+body.hud-dark .hud .bar{background:#FF2E1F;box-shadow:0 0 10px rgba(255,46,31,.6)}
+body.hud-dark #cur{border-color:#FF2E1F}
+body.hud-dark #cur.big{background:#FF2E1F}

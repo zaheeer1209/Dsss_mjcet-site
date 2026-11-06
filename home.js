@@ -247,6 +247,10 @@ function film(){
     }, .94);
     const rp = () => { const q = rtl.progress(); window.Recruit && Recruit.progress(q); panel.classList.toggle('on', q > .8); };
     rtl.eventCallback('onUpdate', rp); window.Recruit && Recruit.resize && Recruit.resize(); rp();
+    // the top bar goes dark with the scene, so the whole screen is the poster while you are inside it
+    const tc = document.querySelector('meta[name=theme-color]'), tc0 = tc && tc.content;
+    ScrollTrigger.create({ trigger:'#recruit', start: () => rtl.scrollTrigger.start - 2, end: () => rtl.scrollTrigger.end,
+      onToggle: st => { document.body.classList.toggle('hud-dark', st.isActive); if (tc) tc.content = st.isActive ? '#0A0A0A' : tc0; } });
   }
 
   if (matchMedia('(hover:hover) and (pointer:fine)').matches){
