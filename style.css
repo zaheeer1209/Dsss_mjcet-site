@@ -13,3 +13,36 @@ h1,h2,h3{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;marg
 .portal-hero{min-height:90vh;display:grid;place-items:center;text-align:center;padding:110px 6vw 70px;position:relative}.portal-hero h1{font-size:clamp(65px,12vw,150px)}.portal-tag{font:700 12px "Barlow Condensed";color:var(--blue);letter-spacing:.12em}.portal-manifest{max-width:1100px;margin:auto;padding:90px 6vw;display:grid;grid-template-columns:1fr 1fr;align-items:center}.members{max-width:1100px;margin:auto;padding:80px 6vw}.member-list{display:grid;gap:10px}.member-record{display:grid;grid-template-columns:70px 1fr auto;align-items:center;border:1px solid var(--line);padding:18px;background:white}.member-record .num{font:800 20px "Barlow Condensed";color:var(--blue)}.member-record h3{font-size:28px}.member-record p{margin:4px 0;color:var(--muted)}.member-record .role{font:700 11px "Barlow Condensed";letter-spacing:.1em;color:var(--blue);text-align:right}
 .gallery-wrap{max-width:1200px;margin:auto;padding:130px 6vw 80px}.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:35px}.gallery-card{border:1px solid var(--line);background:white;overflow:hidden}.gallery-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}.gallery-card div{padding:15px}.gallery-card h3{font-size:24px}.gallery-card p{color:var(--muted);font-size:13px}.empty{padding:50px;border:1px dashed var(--line);color:var(--muted);text-align:center}
 @media(max-width:800px){.topbar nav{display:none}.topbar{padding:0 16px}.section.split,.portal-manifest{grid-template-columns:1fr}.goal-grid,.team-grid,.gallery-grid{grid-template-columns:1fr}.section{padding:90px 20px}.top-right{display:none}.member-record{grid-template-columns:45px 1fr}.member-record .role{grid-column:2;text-align:left}}
+
+/* ===== gallery: event albums ===== */
+.album{margin-top:56px;border-top:2px solid var(--ink);padding-top:26px}
+.album-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.album-k{font:700 12px "Barlow Condensed";letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+.album h2{font-size:clamp(40px,6vw,78px);line-height:.9;margin-top:6px}
+.album-meta{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.album-meta li{font:700 13px "Barlow Condensed";letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--blue);color:var(--blue);padding:6px 10px;background:#fff}
+.album-lede{max-width:70ch;margin:14px 0 0}
+.album-body{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:22px;margin-top:26px;align-items:start}
+.reel{margin:0;position:sticky;top:88px}
+.reel video{display:block;width:100%;height:auto;aspect-ratio:9/16;background:#000;border:1.5px solid var(--ink);box-shadow:8px 8px 0 var(--blue)}
+.reel figcaption{margin-top:14px;font:700 12px "Barlow Condensed";letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-flow:dense;gap:10px}
+.ph{position:relative;display:block;padding:0;border:0;margin:0;cursor:zoom-in;background:#dfe9f6;overflow:hidden;aspect-ratio:3/4}
+.ph.wide{grid-column:span 2;aspect-ratio:auto}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1),filter .3s}
+.ph span{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;text-align:left;color:#fff;font:600 13px Inter,Arial,sans-serif;line-height:1.3;background:linear-gradient(transparent,rgba(7,18,31,.82));opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
+.ph:hover img,.ph:focus-visible img{transform:scale(1.05)}
+.ph:hover span,.ph:focus-visible span{opacity:1;transform:none}
+.ph:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+@media (hover:none){.ph span{opacity:1;transform:none}}
+.lightbox{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100vw;height:100vh}
+.lightbox::backdrop{background:rgba(7,18,31,.92)}
+.lightbox[open]{display:grid;grid-template-columns:64px minmax(0,1fr) 64px;align-items:center}
+.lightbox figure{margin:0;display:grid;justify-items:center;gap:12px;padding:20px 0}
+.lightbox img{max-width:100%;max-height:82vh;object-fit:contain;display:block}
+.lightbox figcaption{color:#e6eefc;font:600 14px Inter,Arial,sans-serif;text-align:center}
+.lb-nav,.lb-close{background:none;border:0;color:#fff;cursor:pointer;font-size:44px;line-height:1;min-width:48px;min-height:48px}
+.lb-close{position:fixed;top:14px;right:16px;font-size:26px}
+.lb-nav:hover,.lb-close:hover{color:var(--cyan)}
+@media(max-width:900px){.album-body{grid-template-columns:1fr}.reel{position:relative;top:0;width:min(100%,320px);justify-self:center}}
+@media(max-width:600px){.photos{grid-template-columns:repeat(2,minmax(0,1fr))}.lightbox[open]{grid-template-columns:40px minmax(0,1fr) 40px}.lb-nav{font-size:34px;min-width:40px}}

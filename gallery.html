@@ -1,9 +1,70 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DSSS // GALLERY</title><link rel="stylesheet" href="style.css"></head>
+<title>DSSS // GALLERY</title>
+<meta name="description" content="Photos and reels from DSSS events at MJCET, starting with Operation: Data Rescue (31 Oct 2026).">
+<meta property="og:title" content="DSSS Gallery · Operation: Data Rescue">
+<meta property="og:image" content="https://dsssmjcet.com/gallery/data-rescue/dr-03.jpg">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="style.css"></head>
 <body>
-<header class="topbar"><a class="brand" href="/">DSSS <span>//</span> GALLERY</a><nav><a href="/">HOME</a><a href="/mainframe">GOVERNING BODY</a></nav><a class="portal-link" href="/">RETURN HOME ↗</a></header>
-<main class="gallery-wrap"><div class="hud">DSSS // GALLERY · LIVE DATABASE</div><h1>EVENT <span>ARCHIVE.</span></h1><p class="muted">Photos published by the DSSS administration.</p><div id="galleryGrid" class="gallery-grid"></div></main>
+<header class="topbar"><a class="brand" href="/">DSSS <span>//</span> GALLERY</a><nav><a href="/">HOME</a><a href="/#caseFile">EVENTS</a><a href="/mainframe">GOVERNING BODY</a></nav><a class="portal-link" href="/">RETURN HOME ↗</a></header>
+<main class="gallery-wrap">
+  <div class="hud">DSSS // GALLERY · EVENT ARCHIVE</div>
+  <h1>EVENT <span>ARCHIVE.</span></h1>
+  <p class="muted">Every event, on the record.</p>
+
+  <section class="album" id="data-rescue" aria-labelledby="drTitle">
+    <div class="album-head">
+      <div>
+        <div class="album-k">Case file 001 · Closed</div>
+        <h2 id="drTitle">Operation: <span>Data Rescue</span></h2>
+      </div>
+      <ul class="album-meta"><li>31 Oct 2026</li><li>9:00 am – 1:00 pm</li><li>CACI Lab, MJCET</li></ul>
+    </div>
+    <p class="muted album-lede">A game-show mystery competition for first-year students: six sessions on data science, NumPy, Pandas, visualization and ML, then a final round to crack the case.</p>
+
+    <div class="album-body">
+      <figure class="reel">
+        <video controls playsinline preload="metadata" poster="gallery/data-rescue/data-rescue-reel-poster.jpg" width="720" height="1280">
+          <source src="gallery/data-rescue/data-rescue-reel.mp4" type="video/mp4">
+        </video>
+        <figcaption>The reel · 23 s · sound on</figcaption>
+      </figure>
+      <div class="photos" id="drPhotos">
+        <button class="ph wide" data-n="03" data-cap="The crew outside M.M. Hashim Block"></button>
+        <button class="ph" data-n="04" data-cap="S1 · Introduction to data science, with Sadiya"></button>
+        <button class="ph" data-n="05" data-cap="Settling in at CACI Lab"></button>
+        <button class="ph wide" data-n="14" data-cap="The organising team kicks things off"></button>
+        <button class="ph" data-n="10" data-cap="Four steps, every question"></button>
+        <button class="ph" data-n="06" data-cap="Sessions on the big screen"></button>
+        <button class="ph" data-n="07" data-cap="Hands-on in Colab, notes ready"></button>
+        <button class="ph wide" data-n="15" data-cap="Live code, questions from the floor"></button>
+        <button class="ph" data-n="08" data-cap="Live coding in Colab"></button>
+        <button class="ph" data-n="09" data-cap="Walking through the code"></button>
+        <button class="ph" data-n="16" data-cap="Checking in on every desk"></button>
+        <button class="ph wide" data-n="17" data-cap="Learn from the past, predict the future"></button>
+        <button class="ph" data-n="18" data-cap="Predict the price of a house"></button>
+        <button class="ph" data-n="19" data-cap="Data → information → knowledge, at the board"></button>
+        <button class="ph" data-n="11" data-cap="Round · The Data Bomb"></button>
+        <button class="ph" data-n="12" data-cap="Final round · Save the Canteen"></button>
+        <button class="ph" data-n="13" data-cap="Cheers from the organising team"></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="album db-album" id="dbAlbum" hidden>
+    <div class="album-head"><div><div class="album-k">From the DSSS database</div><h2>More <span>moments</span></h2></div></div>
+    <div id="galleryGrid" class="gallery-grid"></div>
+  </section>
+</main>
+
+<dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">›</button>
+</dialog>
+
 <footer><span>DSSS // MJCET</span><span>DATA SCIENCE STUDENT SOCIETY</span><span>© 2026–27</span></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="gallery.js"></script>
 </body></html>
