@@ -217,6 +217,25 @@ function film(){
     });
   }, swipe ? .5 : .8);
 
+  // 04b RECRUITMENT · ~6.5 screens (phones 5): a 3D ring tunnel in the poster's colours.
+  //     noise settles into orbits → the camera flies the red "start here" path through MJCET, DSSS and
+  //     EXECOM & CORE → it arrives at the red core ("you") → the hiring details slide in.
+  if ($('#recruit')){
+    const panel = $('#recruit .r-panel');
+    gsap.set(panel, {x: swipe ? 0 : 90, y: swipe ? 120 : 0, opacity:0, rotationY: swipe ? 0 : -24, transformPerspective:1200});
+    const rtl = stage('#recruit', swipe ? 5 : 6.5, tl => {
+      tl.from('#recruit .r-top', {opacity:0, y:-24, duration:.05}, .01)
+        .from('#recruit .r-l1', {opacity:0, y:70, duration:.06}, .03)
+        .from('#recruit .r-l2', {opacity:0, y:140, rotationX:-70, transformPerspective:900, transformOrigin:'50% 100%', duration:.07, ease:'back.out(1.4)'}, .04)
+        .to('#recruit .r-head', {opacity:0, y:-60, scale:.92, duration:.07, ease:'power2.in'}, .22)
+        .to('#recruit .r-top span', {opacity:0, duration:.05}, .24)
+        .to(panel, {x:0, y:0, opacity:1, rotationY:0, duration:.1, ease:'power3.out'}, .82)
+        .from('#recruit .r-panel > *', {opacity:0, y:26, stagger:.018, duration:.05}, .85);
+    }, .94);
+    const rp = () => { const q = rtl.progress(); window.Recruit && Recruit.progress(q); panel.classList.toggle('on', q > .8); };
+    rtl.eventCallback('onUpdate', rp); window.Recruit && Recruit.resize && Recruit.resize(); rp();
+  }
+
   // 05 CTA · ~4 screens: the marquee lies flat like a floor, the sign-off flips up
   stage('#cta', 4, (tl, sec) => {
     tl.fromTo('#mq1', {xPercent:0, rotationX:22, transformPerspective:1200, transformOrigin:'50% 100%'}, {xPercent:-45, rotationX:0, duration:1, ease:'none'}, 0);
@@ -240,5 +259,6 @@ function film(){
 }
 
 BG.start();
+if ((reduce || !window.gsap || !window.ScrollTrigger) && window.Recruit) Recruit.still(); // poster view, no motion
 (() => { if (reduce || !window.gsap || !window.ScrollTrigger) return; (document.fonts ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1500))]) : Promise.resolve()).then(film); })();
 })();
