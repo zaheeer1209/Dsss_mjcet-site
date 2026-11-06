@@ -214,7 +214,8 @@ function film(){
     }, {passive:true});
   }
   else gsap.set(tc.slice(1), {yPercent:140, rotation: i => i % 2 ? 5 : -5, rotationX:65, z:300, transformPerspective:1200});
-  const ttl = stage('#teams', swipe ? 3 : 5.5, (tl, sec) => {
+  const nT = tc.length, step = Math.min(.14, .48/Math.max(1, nT - 1)), DEEP = 5;
+  const ttl = stage('#teams', swipe ? 3 : Math.max(5.5, 3 + nT*.5), (tl, sec) => {
     ebIn(tl, sec, 0); heading(tl, sec, .02, .16);
     tl.from('#teams .status', {opacity:0, x:-30, duration:.06}, .19);
     if (swipe){
@@ -223,12 +224,13 @@ function film(){
       return;
     }
     tl.from(tc[0], {z:-900, rotationX:70, rotationY:-25, opacity:0, transformPerspective:1200, duration:.16}, .22);
+    // each new card lands on top; the deck behind sinks back, and anything deeper than DEEP fades out
     tc.slice(1).forEach((c, i) => {
-      const at = .38 + i*.14;
-      tl.fromTo(c, {yPercent:140, rotation: i % 2 ? 5 : -5, rotationX:65, z:300}, {yPercent:0, rotation:0, rotationX:0, z:0, duration:.13, immediateRender:false}, at)
-        .to(tc.slice(0, i + 1), {z: k => -(i + 1 - k)*130, rotationX: k => (i + 1 - k)*6, y: k => -(i + 1 - k)*30, filter: lite ? 'none' : 'brightness(.86)', duration:.13}, at);
+      const at = .34 + i*step, d = k => Math.min(i + 1 - k, DEEP);
+      tl.fromTo(c, {yPercent:140, rotation: i % 2 ? 5 : -5, rotationX:65, z:300}, {yPercent:0, rotation:0, rotationX:0, z:0, duration:step*.95, immediateRender:false}, at)
+        .to(tc.slice(0, i + 1), {z: k => -d(k)*120, rotationX: k => d(k)*5, y: k => -d(k)*26, opacity: k => i + 1 - k > DEEP ? 0 : 1, filter: lite ? 'none' : 'brightness(.86)', duration:step*.95}, at);
     });
-  }, swipe ? .5 : .8);
+  }, swipe ? .5 : .87);
 
   // 04b RECRUITMENT · ~6.5 screens (phones 5): a 3D ring tunnel in the poster's colours.
   //     noise settles into orbits → the camera flies the red "start here" path through MJCET, DSSS and
