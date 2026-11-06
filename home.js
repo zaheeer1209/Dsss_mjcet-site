@@ -249,19 +249,6 @@ function film(){
     rtl.eventCallback('onUpdate', rp); window.Recruit && Recruit.resize && Recruit.resize(); rp();
   }
 
-  // 05 CTA · ~4 screens: the marquee lies flat like a floor, the sign-off flips up
-  stage('#cta', 4, (tl, sec) => {
-    tl.fromTo('#mq1', {xPercent:0, rotationX:22, transformPerspective:1200, transformOrigin:'50% 100%'}, {xPercent:-45, rotationX:0, duration:1, ease:'none'}, 0);
-    ebIn(tl, sec, .1); heading(tl, sec, .12, .2);
-    tl.from('#cta .cta .btn', {rotationX:-90, transformOrigin:'50% 0%', transformPerspective:700, opacity:0, stagger:.06, duration:.1, ease:'back.out(1.6)'}, .45);
-  }, .6);
-  const mg = $('#magnet');
-  if (matchMedia('(pointer:fine)').matches){
-    const mx = gsap.quickTo(mg, 'x', {duration:.4, ease:'power3'}), my = gsap.quickTo(mg, 'y', {duration:.4, ease:'power3'});
-    mg.addEventListener('pointermove', e => { const r = mg.getBoundingClientRect(); mx((e.clientX - r.left - r.width/2)*.35); my((e.clientY - r.top - r.height/2)*.35); });
-    mg.addEventListener('pointerleave', () => { mx(0); my(0); });
-  }
-
   if (matchMedia('(hover:hover) and (pointer:fine)').matches){
     const hs = $$('main .h2, #heroH');
     const tx = gsap.quickTo(hs, 'rotationY', {duration:.8, ease:'power3'}), ty = gsap.quickTo(hs, 'rotationX', {duration:.8, ease:'power3'});
