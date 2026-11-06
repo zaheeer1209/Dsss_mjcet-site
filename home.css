@@ -350,10 +350,8 @@ body.js main section[data-hud]{grid-template-columns:minmax(0,1fr)}
 .r-cols ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .r-cols li{display:flex;align-items:center;gap:10px;font-weight:600;font-size:clamp(14px,1.15vw,17px)}
 .r-cols li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--r-red);flex-shrink:0}
-.r-apply{display:flex;align-items:center;gap:18px;border-top:1px solid #2E2E2E;padding-top:18px}
-.r-apply img{width:120px;height:120px;display:block;flex-shrink:0}
-.r-applytxt{display:grid;gap:10px;justify-items:start}
-.r-applytxt span{color:var(--r-mute);font-size:13px}
+.r-apply{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;border-top:1px solid #2E2E2E;padding-top:18px}
+.r-applynote{color:var(--r-mute);font-size:13px}
 .r-btn{display:inline-flex;align-items:center;gap:10px;background:var(--r-red);color:var(--r-ink);font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:14px 22px;min-height:44px;box-sizing:border-box;transition:transform .2s,box-shadow .2s}
 .r-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,46,31,.35)}
 .r-btn:focus-visible,.r-contact a:focus-visible{outline:2px solid var(--r-paper);outline-offset:3px}
@@ -375,7 +373,6 @@ body.js #recruit .r-panel.on{visibility:visible}
   body.js #recruit .r-top{top:calc(72px + env(safe-area-inset-top,0px))}
   body.js #recruit .r-panel{left:12px;right:12px;width:auto;top:auto;bottom:12px;max-height:68vh;align-content:start;gap:16px;padding:18px}
   .r-cols{gap:16px}
-  .r-apply img{width:96px;height:96px}
   .r-date{font-size:44px}
 }
 @media (max-width:760px){
